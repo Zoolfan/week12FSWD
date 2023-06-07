@@ -1,7 +1,7 @@
-import * as React from "react";
+import React, { useState } from "react";
 
 function Board() {
-	const [squares, setSquares] = React.useState(Array(9).fill(null));
+	const [squares, setSquares] = useState(Array(9).fill(null));
 	const nextValue = calculateNextValue(squares);
 	const winner = calculateWinner(squares);
 	const status = calculateStatus(winner, squares, nextValue);
@@ -20,10 +20,20 @@ function Board() {
 	}
 
 	function renderSquare(i) {
+		const squareValue = squares[i];
+		const isX = squareValue === "X";
+		const isWinnerSquare = winner && winner.includes(i);
+
 		return (
 			<button
 				type="button"
-				class="btn btn-danger border border-dark p-3 m-2"
+				className={`square-large btn border border-dark p-3 m-2 ${
+					isX ? "x-color" : "o-color"
+				} ${
+					isWinnerSquare
+						? "square-large btn border border-dark p-3 m-2 winner-square"
+						: ""
+				}`}
 				onClick={() => selectSquare(i)}
 			>
 				{squares[i]}
@@ -32,27 +42,27 @@ function Board() {
 	}
 
 	return (
-		<div class="container p-2">
-			<div class="row justify-content-md-center">{status}</div>
-			<div class="row justify-content-md-center">
-				<div class="col col-lg-1">{renderSquare(0)} </div>
-				<div class="col col-lg-1">{renderSquare(1)} </div>
-				<div class="col col-lg-1">{renderSquare(2)} </div>
+		<div className="container mainn opacity-75 p-3">
+			<div className="row justify-content-center">{status}</div>
+			<div className="row">
+				<div className="col">{renderSquare(0)}</div>
+				<div className="col">{renderSquare(1)}</div>
+				<div className="col">{renderSquare(2)}</div>
 			</div>
-			<div class="row justify-content-md-center">
-				<div class="col col-lg-1">{renderSquare(3)} </div>
-				<div class="col col-lg-1">{renderSquare(4)} </div>
-				<div class="col col-lg-1">{renderSquare(5)} </div>
+			<div className="row">
+				<div className="col">{renderSquare(3)}</div>
+				<div className="col">{renderSquare(4)}</div>
+				<div className="col">{renderSquare(5)}</div>
 			</div>
-			<div class="row justify-content-md-center">
-				<div class="col col-lg-1">{renderSquare(6)} </div>
-				<div class="col col-lg-1">{renderSquare(7)} </div>
-				<div class="col col-lg-1">{renderSquare(8)} </div>
+			<div className="row">
+				<div className="col">{renderSquare(6)}</div>
+				<div className="col">{renderSquare(7)}</div>
+				<div className="col">{renderSquare(8)}</div>
 			</div>
-			<div class="row justify-content-md-center">
+			<div className="row mt-3">
 				<button
 					type="button"
-					class="btn btn-warning btn-outline-dark col-lg-1"
+					className="btn btn-warning btn-outline-dark"
 					onClick={restart}
 				>
 					RESTART
@@ -72,7 +82,6 @@ function Game() {
 	);
 }
 
-// eslint-disable-next-line no-unused-vars
 function calculateStatus(winner, squares, nextValue) {
 	return winner
 		? `Winner: ${winner}`
@@ -81,12 +90,10 @@ function calculateStatus(winner, squares, nextValue) {
 		: `Next player: ${nextValue}`;
 }
 
-// eslint-disable-next-line no-unused-vars
 function calculateNextValue(squares) {
 	return squares.filter(Boolean).length % 2 === 0 ? "X" : "O";
 }
 
-// eslint-disable-next-line no-unused-vars
 function calculateWinner(squares) {
 	const lines = [
 		[0, 1, 2],

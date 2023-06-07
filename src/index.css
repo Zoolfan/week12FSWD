@@ -5,7 +5,34 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #666699;
+  /* background-color:darkgray; */
+  background-image: url("../BG.jpg");
+  background-size: cover; 
+  background-position: center;
+  /* filter: blur(2px); */
+}
+
+.mainn{
+  background: whitesmoke;;
+}
+
+.square-large {
+  width: 50px;
+  height: 50px;
+}
+
+.winner-square {
+  background-color: yellow;
+}
+
+.x-color {
+  font-size: larger;
+  color: blue; /* Change to your desired X color */
+}
+
+.o-color {
+  font-size: larger;
+  color: red; /* Change to your desired O color */
 }
 
 code {
