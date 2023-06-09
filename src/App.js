@@ -22,18 +22,14 @@ function Board() {
 	function renderSquare(i) {
 		const squareValue = squares[i];
 		const isX = squareValue === "X";
-		const isWinnerSquare = winner && winner.includes(i);
+		const isWinnerSquare = winner && winner.includes(squares[i]);
 
 		return (
 			<button
 				type="button"
 				className={`square-large btn border border-dark p-3 m-2 ${
 					isX ? "x-color" : "o-color"
-				} ${
-					isWinnerSquare
-						? "square-large btn border border-dark p-3 m-2 winner-square"
-						: ""
-				}`}
+				} ${isWinnerSquare ? "winner-square" : ""}`}
 				onClick={() => selectSquare(i)}
 			>
 				{squares[i]}
@@ -59,10 +55,10 @@ function Board() {
 				<div className="col">{renderSquare(7)}</div>
 				<div className="col">{renderSquare(8)}</div>
 			</div>
-			<div className="row mt-3">
+			<div className="row mt-3 justify-content-center">
 				<button
 					type="button"
-					className="btn btn-warning btn-outline-dark"
+					className="btn btn-warning btn-outline-dark col-5"
 					onClick={restart}
 				>
 					RESTART
