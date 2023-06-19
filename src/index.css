@@ -5,10 +5,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background-color:darkgray; */
-  background-image: url("../BG.jpg");
+  background-color:darkkhaki;
+  /* background-image: url("../BG.jpg");
   background-size: cover; 
-  background-position: center;
+  background-position: center; */
   /* filter: blur(2px); */
 }
 
@@ -17,8 +17,8 @@ body {
 }
 
 .square-large {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
 }
 
 .winner-square {

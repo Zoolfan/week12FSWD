@@ -22,14 +22,38 @@ function Board() {
 	function renderSquare(i) {
 		const squareValue = squares[i];
 		const isX = squareValue === "X";
-		const isWinnerSquare = winner && winner.includes(squares[i]);
+
+		function functionWinnerSquare(squares) {
+			const lines = [
+				[0, 1, 2],
+				[3, 4, 5],
+				[6, 7, 8],
+				[0, 3, 6],
+				[1, 4, 7],
+				[2, 5, 8],
+				[0, 4, 8],
+				[2, 4, 6],
+			];
+			for (let i = 0; i < lines.length; i++) {
+				const [a, b, c] = lines[i];
+				if (
+					squares[a] &&
+					squares[a] === squares[b] &&
+					squares[a] === squares[c]
+				) {
+					return [a, b, c];
+				}
+			}
+		}
+		const winnerSquare = functionWinnerSquare(squares);
+		const highlight = winner && winnerSquare.includes(i);
 
 		return (
 			<button
 				type="button"
-				className={`square-large btn border border-dark p-3 m-2 ${
+				className={`square-large btn border  p-3 m-2 ${
 					isX ? "x-color" : "o-color"
-				} ${isWinnerSquare ? "winner-square" : ""}`}
+				} ${highlight ? "winner-square border-info" : "border-dark"} `}
 				onClick={() => selectSquare(i)}
 			>
 				{squares[i]}
@@ -38,7 +62,7 @@ function Board() {
 	}
 
 	return (
-		<div className="container mainn opacity-75 p-3">
+		<div className="container p-3">
 			<div className="row justify-content-center">{status}</div>
 			<div className="row">
 				<div className="col">{renderSquare(0)}</div>
