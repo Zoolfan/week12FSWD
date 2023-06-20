@@ -22,8 +22,7 @@ function Board() {
 	function renderSquare(i) {
 		const squareValue = squares[i];
 		const isX = squareValue === "X";
-
-		function functionWinnerSquare(squares) {
+		const winnerSquare = (squares) => {
 			const lines = [
 				[0, 1, 2],
 				[3, 4, 5],
@@ -44,9 +43,31 @@ function Board() {
 					return [a, b, c];
 				}
 			}
-		}
-		const winnerSquare = functionWinnerSquare(squares);
-		const highlight = winner && winnerSquare.includes(i);
+		};
+		// function functionWinnerSquare(squares) {
+		// 	const lines = [
+		// 		[0, 1, 2],
+		// 		[3, 4, 5],
+		// 		[6, 7, 8],
+		// 		[0, 3, 6],
+		// 		[1, 4, 7],
+		// 		[2, 5, 8],
+		// 		[0, 4, 8],
+		// 		[2, 4, 6],
+		// 	];
+		// 	for (let i = 0; i < lines.length; i++) {
+		// 		const [a, b, c] = lines[i];
+		// 		if (
+		// 			squares[a] &&
+		// 			squares[a] === squares[b] &&
+		// 			squares[a] === squares[c]
+		// 		) {
+		// 			return [a, b, c];
+		// 		}
+		// 	}
+		// }
+		// const winnerSquare = functionWinnerSquare(squares);
+		const highlight = winner && winnerSquare(squares).includes(i);
 
 		return (
 			<button
